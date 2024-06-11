@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Home from "../pages/Home";
+import MyPage from "../pages/MyPage";
 // 기타 필요한 컴포넌트 임포트
 
 const router = createBrowserRouter([
@@ -17,7 +18,10 @@ const router = createBrowserRouter([
     path: "/home",
     element: <Home />
   },
-  // 기타 라우트
+  {
+    path: "/mypage",
+    element: <MyPage />
+  },
 ]);
 
 export default router;
