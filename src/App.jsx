@@ -1,7 +1,7 @@
 import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import GlobalStyles from "./components/GlobalStyled";
-import Header from "./layout/Header";
+import Header from "./components/Header/Header";
 import router from "./routes/router";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <>
       <GlobalStyles />
       <Header />
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </>
   );
 }
