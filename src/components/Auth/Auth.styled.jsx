@@ -7,7 +7,7 @@ export const AuthContainer = styled.div`
   align-items: center;
   justify-content: center;
 `
-export const AuthInContanier = styled.form`
+export const AuthForm = styled.form`
   width: 60%;
   height: 100%;
   background-color: #fff6eb;

@@ -8,20 +8,12 @@ import {
   HeaderText,
   HeaderBtn,
 } from "./Header.styled";
-import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const { isAuthenticated, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    const confirmLogout = window.confirm("정말로 로그아웃 하시겠습니까?");
-    if (confirmLogout) {
-      logout();
-      navigate("/");
-    }
-  };
+  const handleLogout = () => {};
 
   // 현재 위치가 로그인 페이지 or 회원가입 페이지인지 확인
   const isLogin = location.pathname === "/login";
@@ -35,19 +27,11 @@ const Header = () => {
       <HeaderInContainer>
         <LeftContainer>
           <HeaderHome to={"/home"}>HOME</HeaderHome>
-          {isAuthenticated && <HeaderText to={"/mypage"}>내 프로필</HeaderText>}
+          <HeaderText to={"/mypage"}>내 프로필</HeaderText>
         </LeftContainer>
         <RightContainer>
-          {isAuthenticated ? (
-            <>
-              <HeaderText>유저이름</HeaderText>
-              <HeaderBtn onClick={handleLogout}>로그아웃</HeaderBtn>
-            </>
-          ) : (
-            <>
-              <HeaderBtn onClick={() => navigate("/login")}>로그인</HeaderBtn>
-            </>
-          )}
+          <HeaderText to={"/mypage"}>유저 이름</HeaderText>
+          <HeaderBtn onClick={() => navigate("/login")}>로그인</HeaderBtn>
         </RightContainer>
       </HeaderInContainer>
     </HeaderContainer>
