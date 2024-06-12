@@ -1,16 +1,32 @@
-import { RouterProvider } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./App.css";
 import GlobalStyles from "./components/GlobalStyled";
-import Header from "./components/Header/Header";
-import router from "./routes/router";
+import { AuthProvider } from "./context/AuthContext";
+import SharedRouter from "./shared/SharedRouter";
+import { getUserInfo } from "./api/auth";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    getUserInfo().then((res) => {
+      if (res) {
+        setUser({
+          userId: res.id,
+          nickname: res.nickname,
+          avator: res.avator,
+        });
+      }
+    });
+  });
+
+  console.log("로그인된 유저 정보: ", user);
+
   return (
-    <>
+    <AuthProvider>
       <GlobalStyles />
-      <Header />
-      <RouterProvider router={router} />
-    </>
+      <SharedRouter setUser={setUser} />
+    </AuthProvider>
   );
 }
 

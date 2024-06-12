@@ -8,7 +8,6 @@ import {
 } from "../components/Auth/Auth.styled";
 import { register } from "../api/auth";
 import { useNavigate } from "react-router-dom";
-import { login } from "../api/auth";
 
 const SignUp = () => {
   const [id, setId] = useState("");
@@ -18,18 +17,18 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    if (id.length < 4 || id.length > 8) {
-      alert("아이디는 4~12글자 이내로만 가능합니다!!");
+    if (id.length < 4 || id.length > 10) {
+      alert("아이디는 4~10글자 이내로만 가능합니다!!");
       return;
     }
 
-    if (password.length < 4 || password.length > 8) {
-      alert("비밀번호는 4~12글자 이내로만 가능합니다!!");
+    if (password.length < 4 || password.length > 15) {
+      alert("비밀번호는 4~15글자 이내로만 가능합니다!!");
       return;
     }
 
-    if (nickname.length < 4 || nickname.length > 8) {
-      alert("닉네임은 4~8글자 이내로만 가능합니다!!");
+    if (nickname.length < 1 || nickname.length > 10) {
+      alert("닉네임은 1~10글자 이내로만 가능합니다!!");
       return;
     }
 
