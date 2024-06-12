@@ -18,7 +18,7 @@ function App() {
         });
       }
     });
-  });
+  }, []);
 
   console.log("로그인된 유저 정보: ", user);
 

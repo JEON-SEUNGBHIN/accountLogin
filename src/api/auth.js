@@ -16,7 +16,7 @@ export const register = async ({ id, password, nickname }) => {
   }
 };
 
-export const login = async ({ id, password }) => {
+export const loginLogic = async ({ id, password }) => {
   try {
     const response = await axios.post(AUTH_API_HOST + "/login?expireIn=10m", {
       id: id,

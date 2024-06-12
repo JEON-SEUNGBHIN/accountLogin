@@ -8,21 +8,20 @@ import {
   SignBtn,
 } from "../components/Auth/Auth.styled";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { login } from "../api/auth";
+import { loginLogic } from "../api/auth";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = ({ setUser }) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const { userId, nickname, avatar } = await login({
+    const { userId, nickname, avatar } = await loginLogic({
       id: id,
       password: password,
     });
-
     setUser({ userId, nickname, avatar });
   };
 
