@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.header`
   width: 100%;
   display: flex;
   background-color: #ff5500;
@@ -9,7 +10,7 @@ export const HeaderContainer = styled.div`
   justify-content: center;
 `;
 
-export const HeaderInContainer = styled.div`
+export const HeaderInContainer = styled.nav`
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -26,16 +27,20 @@ export const RightContainer = styled.div`
   align-items: center;
 `;
 
-export const HeaderHome = styled.h1`
+export const HeaderHome = styled(Link)`
   color: white;
   font-size: 2rem;
   font-weight: bold;
   margin-right: 5rem;
+  text-decoration: none;
+  cursor: pointer;
 `;
 
-export const HeaderText = styled.h4`
+export const HeaderText = styled(Link)`
   color: white;
   font-size: 1.2rem;
+  text-decoration: none;
+  cursor: pointer;
 `
 
 export const HeaderBtn = styled.button`
