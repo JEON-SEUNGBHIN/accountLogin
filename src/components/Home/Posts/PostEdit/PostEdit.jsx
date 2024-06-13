@@ -28,6 +28,7 @@ export const PostEdit = () => {
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [content, setContent] = useState("");
+  const [createdBy, setCreatedBy] = useState(""); // createdBy 상태 추가
 
   useEffect(() => {
     if (selectedSpend) {
@@ -35,6 +36,7 @@ export const PostEdit = () => {
       setCategory(selectedSpend.category);
       setAmount(selectedSpend.amount);
       setContent(selectedSpend.content);
+      setCreatedBy(selectedSpend.createdBy);
     }
   }, [selectedSpend]);
 
@@ -67,6 +69,7 @@ export const PostEdit = () => {
       category: category,
       amount: parseFloat(amount),
       content: content,
+      createdBy: createdBy,
     };
     const isConfirmed = window.confirm("정말로 수정하시겠습니까?");
     if (isConfirmed) {

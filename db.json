@@ -1,10 +1,11 @@
 {
   "spends": [
     {
-      "date": "2024-01-01",
+      "date": "2024-02-01",
       "category": "개인사업",
       "amount": 100000,
       "content": "테슬라 모델 3",
+      "createdBy": "Musk",
       "id": "46869445-5f9c-4650-941f-41bd9457bc07"
     },
     {
@@ -40,12 +41,12 @@
       "createdBy": "Me"
     },
     {
-      "id": "d180194f-7c27-428a-8cd9-ad9114e58821",
       "date": "2024-01-22",
       "category": "도서",
       "amount": 23000,
       "content": "리액트 마스터",
-      "createdBy": "Me"
+      "createdBy": "Me",
+      "id": "d180194f-7c27-428a-8cd9-ad9114e58821"
     },
     {
       "id": "0abf06c3-8f0e-4ea1-9691-7facab0a91cb",
@@ -54,6 +55,14 @@
       "amount": 100000,
       "content": "세광양대창",
       "createdBy": "Me"
+    },
+    {
+      "id": "097f79b8-1611-47dc-b7c0-66f7c39fd4bf",
+      "date": "2024-06-13",
+      "category": "카페",
+      "amount": 2000,
+      "content": "아메리카노",
+      "createdBy": "react"
     }
   ]
 }

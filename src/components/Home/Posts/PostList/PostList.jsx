@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   ListContainer,
   ListUl,
@@ -15,20 +15,24 @@ import { getSpends } from "../../../../api/spend";
 
 // 지출 목록을 표시하는 컴포넌트
 export const PostList = ({ selectedMonth }) => {
-  // useQuery를 통해 데이터를 불러옵니다. queryKey와 queryFn을 적절히 사용합니다.
   const {
     data: spends = [],
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["spends", selectedMonth], // queryKey에 selectedMonth를 추가합니다.
-    queryFn: () => getSpends(selectedMonth), // queryFn으로 getSpends 함수를 사용합니다.
+    queryKey: ["spends"], // selectedMonth 제거
+    queryFn: getSpends, // selectedMonth 제거
   });
 
   if (isLoading) {
     return <div>Loading</div>;
   }
 
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  // selectedMonth 값으로 필터링
   const filteredSpends = selectedMonth
     ? spends.filter(
         (spend) => new Date(spend.date).getMonth() === selectedMonth - 1
@@ -38,10 +42,10 @@ export const PostList = ({ selectedMonth }) => {
   return (
     <ListContainer>
       {/* 필터된 지출 목록이 있을 경우 */}
-      {spends.length > 0 ? (
+      {filteredSpends.length > 0 ? ( // spends 대신 filteredSpends 사용
         <ListUl>
           {/* 각 지출 항목을 링크로 표시 */}
-          {spends.map((spend) => (
+          {filteredSpends.map((spend) => ( // spends 대신 filteredSpends 사용
             <StyledLink key={spend.id} to={`/update/${spend.id}`}>
               <ListLi>
                 <LeftDiv>

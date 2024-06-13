@@ -19,7 +19,7 @@ const Home = ({ user }) => {
         <PostForm user={user} />
       </InStyledBox>
       <InStyledBox>
-        <PostList selectedMonth={setSelectedMonth} />
+        <PostList selectedMonth={selectedMonth} />
       </InStyledBox>
     </>
   );
