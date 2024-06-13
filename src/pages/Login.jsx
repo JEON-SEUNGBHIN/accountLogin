@@ -11,18 +11,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginLogic } from "../api/auth";
 import { AuthContext } from "../context/AuthContext";
 
-const Login = ({ setUser }) => {
+const Login = ({setUser}) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const { userId, nickname, avatar } = await loginLogic({
+    const { accessToken, userId, nickname, avatar } = await loginLogic({
       id: id,
       password: password,
     });
-    setUser({ userId, nickname, avatar });
+    login(accessToken); // 로그인 함수 호출
+    setUser({ userId, nickname, avatar }); // 사용자 정보 설정
+    navigate("/"); // 홈페이지로 이동
   };
 
   return (

@@ -25,7 +25,7 @@ function App() {
   return (
     <AuthProvider>
       <GlobalStyles />
-      <SharedRouter setUser={setUser} />
+      <SharedRouter user={user} setUser={setUser} />
     </AuthProvider>
   );
 }

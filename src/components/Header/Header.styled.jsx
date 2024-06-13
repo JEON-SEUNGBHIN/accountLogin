@@ -36,6 +36,10 @@ export const HeaderHome = styled(Link)`
   cursor: pointer;
 `;
 
+export const HeaderAvator = styled.img`
+  width: auto;
+`
+
 export const HeaderText = styled(Link)`
   color: white;
   font-size: 1.2rem;

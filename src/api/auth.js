@@ -40,8 +40,26 @@ export const getUserInfo = async () => {
         },
       });
       return response.data;
-    } catch (error) {
-      console.log(error?.response?.data?.message);
-      alert(error?.response?.data?.message);
+    } catch(error) {
+      alert("AccessToken이 만료되었습니다.");
+      localStorage.clear();
     }
 };
+
+export const updateProfile = async () => {
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    try {
+      const response = await axios.patch(AUTH_API_HOST + "/profile", {
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response.data;
+    } catch(error) {
+      alert("AccessToken이 만료되었습니다.");
+      localStorage.clear();
+    }
+  }
+}

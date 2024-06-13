@@ -21,13 +21,21 @@ const PublicRoute = ({ element: Element, ...rest }) => {
   return !isAuthenticated ? <Element {...rest} /> : <Navigate to="/" />;
 };
 
-const SharedRouter = () => (
+const SharedRouter = ({ user, setUser }) => (
   <BrowserRouter>
-    <Header />
+    <Header user={user} setUser={setUser} />
     <Routes>
       <Route path="/" element={<PrivateRoute element={Home} />} />
-      <Route path="/mypage" element={<PrivateRoute element={MyPage} />} />
-      <Route path="/login" element={<PublicRoute element={Login} />} />
+      <Route
+        path="/mypage"
+        element={
+          <PrivateRoute element={MyPage} setUser={setUser} user={user} />
+        }
+      />
+      <Route
+        path="/login"
+        element={<PublicRoute element={Login} setUser={setUser} />}
+      />
       <Route path="/signup" element={<PublicRoute element={SignUp} />} />
     </Routes>
   </BrowserRouter>
