@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import MyPage from "../pages/MyPage";
 import { AuthContext } from "../context/AuthContext";
+import { PostEdit } from "../components/Home/Posts/PostEdit/PostEdit";
 
 // PrivateRoute : 로그인이 필요한 페이지에 접근할 수 있도록 하는 컴포넌트
 // 로그인이 되어있지 않은 사용자는 login 페이지로 리다이렉트
@@ -26,6 +27,10 @@ const SharedRouter = ({ user, setUser }) => (
     <Header user={user} setUser={setUser} />
     <Routes>
       <Route path="/" element={<PrivateRoute element={Home} user={user} />} />
+      <Route
+        path="/update/:id"
+        element={<PrivateRoute element={PostEdit} user={user} />}
+      />
       <Route
         path="/mypage"
         element={

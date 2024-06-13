@@ -45,7 +45,7 @@ export const PostList = ({ selectedMonth }) => {
             <StyledLink key={spend.id} to={`/update/${spend.id}`}>
               <ListLi>
                 <LeftDiv>
-                  <div style={{ color: "#aeaeae" }}>{spend.date}</div>
+                  <div style={{ color: "#aeaeae" }}>{spend.date} - {spend.createdBy}</div>
                   <ContentContainer>
                     <Content>
                       {spend.category} - {spend.content}

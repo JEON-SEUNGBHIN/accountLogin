@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InStyledBox } from "../components/Home/Home.styled";
+import { InStyledBox } from "../components/Home/Main/Home.styled";
 import Month from "../components/Home/Posts/Months/Month";
 import PostForm from "../components/Home/Posts/PostForm/PostForm";
 import PostList from "../components/Home/Posts/PostList/PostList";

@@ -7,7 +7,8 @@ import {
 } from "./PostForm.styled";
 import { v4 as uuidv4 } from "uuid";
 import { postSpends } from "../../../../api/spend";
-import { useMutation } from "@tanstack/react-query";
+import { QueryClient, useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 // 지출 기록을 추가하는 폼을 나타내는 컴포넌트
 export const PostForm = ({ user }) => {
@@ -16,8 +17,15 @@ export const PostForm = ({ user }) => {
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [content, setContent] = useState("");
+  const navigate = useNavigate();
 
-  const mutation = useMutation({ mutationFn: postSpends });
+  const mutation = useMutation({
+    mutationFn: postSpends,
+    onSuccess: () => {
+      QueryClient.invalidateQueries(["spends"]);
+      navigate(0);
+    },
+  });
 
   // 지출을 추가하는 함수.
   const addSpends = (e) => {

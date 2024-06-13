@@ -1,12 +1,11 @@
 {
   "spends": [
     {
-      "id": "46869445-5f9c-4650-941f-41bd9457bc07",
-      "date": "2024-01-03",
+      "date": "2024-01-01",
       "category": "개인사업",
-      "amount": 1000000,
+      "amount": 100000,
       "content": "테슬라 모델 3",
-      "createdBy": "Musk"
+      "id": "46869445-5f9c-4650-941f-41bd9457bc07"
     },
     {
       "id": "a5c0d8de-d010-4d07-9934-29765051a7ea",
@@ -55,14 +54,6 @@
       "amount": 100000,
       "content": "세광양대창",
       "createdBy": "Me"
-    },
-    {
-      "id": "c622c0e4-e1b5-43a5-88db-603d66c843ce",
-      "date": "2024-06-03",
-      "category": "카페",
-      "amount": 2000,
-      "content": "커피",
-      "createdBy": "react"
     }
   ]
 }

@@ -1,6 +1,5 @@
-import React, { useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   UpdateFormStyle,
   UpdateInputStyle,
@@ -9,77 +8,110 @@ import {
   UpdateBtnStyleDelete,
   UpdateBtnStyleBack,
 } from "./PostEdit.styled";
-import { deleteSpend, editSpend } from "../redux/modules/action";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getSpend, putSpend, deleteSpend } from "../../../../api/spend";
 
 export const PostEdit = () => {
-  // URL에서 id 매개변수를 가져옴
-  const { id } = useParams();
-
-  // 페이지 이동을 위한 navigate 함수를 가져옴
+  const { id } = useParams(); // useParams 훅을 사용하여 URL에서 id 파라미터 추출
   const navigate = useNavigate();
 
-  // Redux의 상태를 가져옴
-  const spends = useSelector((state) => state.spends.spends);
-  const spend = spends.find((s) => s.id.toString() === id);
+  const {
+    data: selectedSpend,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["spends", id],
+    queryFn: getSpend,
+  });
 
-  // useDispatch 훅을 사용하여 액션을 디스패치
-  const dispatch = useDispatch();
-  const dateRef = useRef(null);
-  const categoryRef = useRef(null);
-  const amountRef = useRef(null);
-  const contentRef = useRef(null);
+  const [date, setDate] = useState("");
+  const [category, setCategory] = useState("");
+  const [amount, setAmount] = useState("");
+  const [content, setContent] = useState("");
 
-  // 지출 항목이 변경될 때마다 해당 항목의 값을 입력란에 채움
   useEffect(() => {
-    if (spend) {
-      dateRef.current.value = spend.date;
-      categoryRef.current.value = spend.category;
-      amountRef.current.value = spend.amount;
-      contentRef.current.value = spend.content;
+    if (selectedSpend) {
+      setDate(selectedSpend.date);
+      setCategory(selectedSpend.category);
+      setAmount(selectedSpend.amount);
+      setContent(selectedSpend.content);
     }
-  }, [spend]);
+  }, [selectedSpend]);
 
-  // 삭제하는 함수
+  const mutationDelete = useMutation({
+    mutationFn: deleteSpend,
+    onSuccess: () => {
+      navigate("/");
+    },
+  });
+
   const handleDelete = () => {
     const isConfirmed = window.confirm("정말로 삭제하시겠습니까?");
     if (isConfirmed) {
-      dispatch(deleteSpend(spend.id)); // deleteSpend 액션 디스패치
-      navigate("/");
+      mutationDelete.mutate(id);
     }
   };
 
-  // 수정하는 함수
+  const mutationEdit = useMutation({
+    mutationFn: putSpend,
+    onSuccess: () => {
+      navigate("/");
+    },
+  });
+
   const handleEdit = (e) => {
     e.preventDefault();
     const updatedSpend = {
-      ...spend,
-      date: dateRef.current.value,
-      category: categoryRef.current.value,
-      amount: parseFloat(amountRef.current.value),
-      content: contentRef.current.value,
+      id: id,
+      date: date,
+      category: category,
+      amount: parseFloat(amount),
+      content: content,
     };
     const isConfirmed = window.confirm("정말로 수정하시겠습니까?");
     if (isConfirmed) {
-      dispatch(editSpend(updatedSpend)); // editSpend 액션 디스패치
-      navigate("/");
+      mutationEdit.mutate(updatedSpend);
     }
   };
 
-  if (!spend) {
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!selectedSpend) {
     return <div>해당 항목을 찾을 수 없습니다.</div>;
   }
 
   return (
-    // 수정 폼을 랜더링
     <UpdateFormStyle onSubmit={handleEdit}>
       날짜
-      <UpdateInputStyle type="date" ref={dateRef} />
+      <UpdateInputStyle
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
       항목
-      <UpdateInputStyle type="text" ref={categoryRef} />
+      <UpdateInputStyle
+        type="text"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      />
       금액
-      <UpdateInputStyle type="text" ref={amountRef} />
+      <UpdateInputStyle
+        type="text"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+      />
       내용
-      <UpdateInputStyle type="text" ref={contentRef} />
+      <UpdateInputStyle
+        type="text"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
       <ButtonContainer>
         <UpdateBtnStyle type="submit">수정</UpdateBtnStyle>
         <UpdateBtnStyleDelete type="button" onClick={handleDelete}>
@@ -92,5 +124,3 @@ export const PostEdit = () => {
     </UpdateFormStyle>
   );
 };
-
-export default PostEdit;
