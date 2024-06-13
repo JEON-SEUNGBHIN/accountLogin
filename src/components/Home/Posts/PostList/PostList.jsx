@@ -20,8 +20,8 @@ export const PostList = ({ selectedMonth }) => {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["spends"], // selectedMonth 제거
-    queryFn: getSpends, // selectedMonth 제거
+    queryKey: ["spends"], 
+    queryFn: getSpends, 
   });
 
   if (isLoading) {
