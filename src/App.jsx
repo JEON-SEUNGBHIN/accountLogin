@@ -14,7 +14,7 @@ function App() {
         setUser({
           userId: res.id,
           nickname: res.nickname,
-          avator: res.avator,
+          avatar: res.avatar,
         });
       }
     });

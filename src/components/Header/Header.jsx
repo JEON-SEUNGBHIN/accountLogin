@@ -26,7 +26,7 @@ const Header = ({ user }) => {
         <RightContainer>
           {user && (
             <>
-              <HeaderAvator src={user.avator} alt="avator" />
+              <HeaderAvator src={user.avatar} alt="avatar" />
               <HeaderText to={"/mypage"}>{user.nickname}</HeaderText>
             </>
           )}

@@ -25,6 +25,7 @@ export const LeftContainer = styled.div`
 export const RightContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 export const HeaderHome = styled(Link)`
@@ -37,15 +38,19 @@ export const HeaderHome = styled(Link)`
 `;
 
 export const HeaderAvator = styled.img`
-  width: auto;
-`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+`;
 
 export const HeaderText = styled(Link)`
   color: white;
   font-size: 1.2rem;
   text-decoration: none;
   cursor: pointer;
-`
+`;
 
 export const HeaderBtn = styled.button`
   margin-left: 2.5rem;
