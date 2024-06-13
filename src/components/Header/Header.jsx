@@ -20,7 +20,7 @@ const Header = ({ user }) => {
     <HeaderContainer>
       <HeaderInContainer>
         <LeftContainer>
-          <HeaderHome to={"/home"}>HOME</HeaderHome>
+          <HeaderHome to={"/"}>HOME</HeaderHome>
           <HeaderText to={"/mypage"}>내 프로필</HeaderText>
         </LeftContainer>
         <RightContainer>
