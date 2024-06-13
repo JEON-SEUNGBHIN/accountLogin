@@ -4,22 +4,36 @@ import {
   ListUl,
   StyledLink,
   ListLi,
-  LeftDiv,
   ContentContainer,
   Content,
   LeftDiv,
   RightDiv,
   NoSpends,
 } from "./PostList.styled";
+import { useQuery } from "@tanstack/react-query";
+import { getSpends } from "../../../../api/spend";
 
 // 지출 목록을 표시하는 컴포넌트
-const PostList = ({ filteredSpends }) => {
-  // filteredSpends가 변경될 때마다 spends 상태 업데이트
-  const [spends, setSpends] = useState(filteredSpends || []);
+export const PostList = ({ selectedMonth }) => {
+  // useQuery를 통해 데이터를 불러옵니다. queryKey와 queryFn을 적절히 사용합니다.
+  const {
+    data: spends = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["spends", selectedMonth], // queryKey에 selectedMonth를 추가합니다.
+    queryFn: () => getSpends(selectedMonth), // queryFn으로 getSpends 함수를 사용합니다.
+  });
 
-  useEffect(() => {
-    setSpends(filteredSpends || []);
-  }, [filteredSpends]);
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+
+  const filteredSpends = selectedMonth
+    ? spends.filter(
+        (spend) => new Date(spend.date).getMonth() === selectedMonth - 1
+      )
+    : spends;
 
   return (
     <ListContainer>

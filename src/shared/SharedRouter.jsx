@@ -25,7 +25,7 @@ const SharedRouter = ({ user, setUser }) => (
   <BrowserRouter>
     <Header user={user} setUser={setUser} />
     <Routes>
-      <Route path="/" element={<PrivateRoute element={Home} />} />
+      <Route path="/" element={<PrivateRoute element={Home} user={user} />} />
       <Route
         path="/mypage"
         element={

@@ -11,7 +11,7 @@ import {
 } from "./PostEdit.styled";
 import { deleteSpend, editSpend } from "../redux/modules/action";
 
-const PostEdit = () => {
+export const PostEdit = () => {
   // URL에서 id 매개변수를 가져옴
   const { id } = useParams();
 

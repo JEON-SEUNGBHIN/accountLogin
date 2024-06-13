@@ -1,17 +1,23 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { StyledForm, StyledFormGroup, StyledInput, StyledBtn } from "./PostForm.styled";
+import {
+  StyledForm,
+  StyledFormGroup,
+  StyledInput,
+  StyledBtn,
+} from "./PostForm.styled";
 import { v4 as uuidv4 } from "uuid";
-import { addSpend } from "../redux/modules/action";
+import { postSpends } from "../../../../api/spend";
+import { useMutation } from "@tanstack/react-query";
 
 // 지출 기록을 추가하는 폼을 나타내는 컴포넌트
-const PostForm = ({ spends, setSpends }) => {
+export const PostForm = ({ user }) => {
   // 입력 필드에 대한 상태 관리.
   const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [content, setContent] = useState("");
-  const dispatch = useDispatch();
+
+  const mutation = useMutation({ mutationFn: postSpends });
 
   // 지출을 추가하는 함수.
   const addSpends = (e) => {
@@ -28,9 +34,11 @@ const PostForm = ({ spends, setSpends }) => {
       category,
       amount: parseFloat(amount), // 금액을 숫자형으로 변환
       content,
+      createdBy: user.userId,
     };
 
-    dispatch(addSpend(newSpend));
+    mutation.mutate(newSpend);
+
     // 입력 필드 초기화
     setDate("");
     setCategory("");
