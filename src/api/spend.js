@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const JSON_SERVER = "http://localhost:5110";
+const JSON_SERVER = "https://humble-iron-scourge.glitch.me";
 
 export const getSpends = async () => {
   try {
